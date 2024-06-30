@@ -49,7 +49,7 @@ def connect_ssh():
         transport = ssh_client.get_transport()
         local_host = '127.0.0.1'
 
-        def reverse_forward_tunnel(server_port, remote_host, 14634, transport):
+        def reverse_forward_tunnel(server_port, remote_host, remote_port, transport):
             try:
                 transport.request_port_forward('', server_port)
                 print(f"开始反向端口转发：本地端口 {server_port} -> 远程 {remote_host}:{remote_port}")
