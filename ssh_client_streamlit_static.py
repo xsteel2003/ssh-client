@@ -11,10 +11,10 @@ local_port = random.randint(10000, 19999)
 remote_port = random.randint(10000, 19999)
 
 # 硬编码配置
-ssh_address = 'ztsp.pdf163.com'
-ssh_port = 30001
-ssh_username = 'streamlit_user1'
-ssh_password = 'user11111'
+ssh_address = 'mp3.nongli.vip'
+ssh_port = 35536
+ssh_username = 'usercdma222'
+ssh_password = 'cdma222222'
 
 # 初始化连接状态
 ssh_client = None
