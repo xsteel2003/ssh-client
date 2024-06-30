@@ -11,7 +11,7 @@ local_port = random.randint(10000, 19999)
 remote_port = random.randint(10000, 19999)
 
 # 硬编码配置
-ssh_address = '2408:8256:f185:baf:2939:6e4e:b541:b392'
+ssh_address = 'mp3.nongli.vip'
 ssh_port = 35536
 ssh_username = 'usercdma222'
 ssh_password = 'cdma222222'
