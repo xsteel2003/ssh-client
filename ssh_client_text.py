@@ -119,11 +119,15 @@ class SSHConnection:
                 time.sleep(self.reconnect_interval)
 
     def run(self):
-        # 启动 SOCKS5 代理服务器
-        proxy_thread = threading.Thread(target=self.start_socks5_proxy)
-        proxy_thread.daemon = True
-        proxy_thread.start()
-        time.sleep(2)  # 等待服务器启动
+        # 检查本地端口是否已经开放
+        if self.is_port_available(self.local_port):
+            # 启动 SOCKS5 代理服务器
+            proxy_thread = threading.Thread(target=self.start_socks5_proxy)
+            proxy_thread.daemon = True
+            proxy_thread.start()
+            time.sleep(2)  # 等待服务器启动
+        else:
+            print(f"本地端口 {self.local_port} 已经被占用，跳过启动代理服务器")
 
         # 启动SSH连接线程
         connect_ssh_thread = threading.Thread(target=self.connect_ssh)
@@ -144,6 +148,14 @@ class SSHConnection:
             self.connected = False
             if self.ssh_client:
                 self.ssh_client.close()
+
+    def is_port_available(self, port):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(('0.0.0.0', port))
+                return True
+            except OSError:
+                return False
 
 if __name__ == "__main__":
     ssh_connection = SSHConnection()
